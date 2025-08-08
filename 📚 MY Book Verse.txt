@@ -1,0 +1,15 @@
+📚 MY Book Verse
+MY Book Verse is a simple, clean, and professional web application that allows users to create an account, add their favorite books, and read books shared by others. Books are described by title, cover image URL, and a "read" URL (such as a PDF or online document). The UI is inspired by Myntra’s clean and vibrant style.
+
+This project’s backend uses Node.js, Express, and MongoDB Atlas, while the frontend is basic HTML, CSS, and JavaScript – ideal for beginners to learn web development, database integration, and user authentication.
+
+✨ Features
+User Accounts: Signup, login, and logout
+
+Add a Book: Title, image URL, and reading URL (PDF, website, etc.)
+
+Read Books: Browse all books added by all users, see who added each
+
+Secure: Passwords are hashed; sessions handle authentication
+
+Responsive UI: Simple styling inspired by Myntra’s signature colors
