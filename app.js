@@ -15,6 +15,13 @@ app.use(session({
   cookie: { secure: false }
 }));
 
+
+var express = require('express');
+var bodyparser = require('body-parser');
+var mongoose = require('mongoose');
+
+
+
 // Connect to MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
