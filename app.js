@@ -7,19 +7,22 @@ require('dotenv').config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
-app.use(session({
-  secret: 'mybookverse_secret_key',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false }
+
+
+app.use(cors({
+  origin: true,          
+  credentials: true      
 }));
 
-
-var express = require('express');
-var bodyparser = require('body-parser');
-var mongoose = require('mongoose');
-
+app.use(session({
+  secret: "mybookverse_secret_key",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    sameSite: "none",    
+    secure: false          
+  }
+}));
 
 
 // Connect to MongoDB Atlas

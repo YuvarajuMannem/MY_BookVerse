@@ -1,473 +1,566 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>MY Book Verse</title>
-    <link href="https://fonts.googleapis.com/css2?family=Shojumaru&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Atomic+Age&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Shojumaru&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Atomic+Age&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 1600px;
+        margin: 40px auto;
+        padding: 0 30px;
+        background: #f5f5f5;
+        color: #333;
+      }
+      header {
+        background: #232f3e;
+        color: #ff9900;
+        padding: 30px 10px;
+        text-align: center;
+        border-radius: 12px;
+        margin-bottom: 24px;
+      }
+      h1 {
+        font-family: "Shojumaru", cursive;
+        margin: 0;
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+      }
+      .center-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+        margin-bottom: 40px;
+        gap: 40px;
+      }
+      .container {
+        background: white;
+        padding: 28px 24px;
+        border-radius: 14px;
+        box-shadow: 0 0 16px rgba(0, 0, 0, 0.08);
+        width: 350px;
+        max-width: 110vw;
+        margin: 0 auto;
+        box-sizing: border-box;
+      }
+      #user-section.container {
+        width: 100%;
+        max-width: 1000px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      input,
+      select,
+      textarea {
+        font-size: 15px;
+        margin: 9px 0 16px 0;
+        padding: 9px 9px;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 7px;
+        border: 1px solid #ddd;
+      }
+      button {
+        background: linear-gradient(90deg, #ff9900, #ffcc00);
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        cursor: pointer;
+        transition: background 0.3s;
+        font-size: 15px;
+        border-radius: 7px;
+        margin: 7px 0;
+      }
+      button:hover {
+        background: linear-gradient(90deg, #ffcc00, #ff9900);
+      }
+      .button-group {
+        display: flex;
+        justify-content: center;
+        margin: 12px 0 8px 0;
+        gap: 8px;
+      }
+      .search-container {
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+      .search-container input {
+        width: 360px;
+        max-width: 70vw;
+        font-size: 17px;
+        padding: 9px 12px;
+        margin-bottom: 0;
+        border-radius: 8px;
+      }
+      .search-container button {
+        width: 100px;
+        font-size: 15px;
+        padding: 9px 0;
+        border-radius: 7px;
+      }
+      /* --- User section top bar (Welcome, Add Book, Logout) --- */
+      .user-top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .user-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .logout-btn {
+        background: linear-gradient(90deg, #d9534f, #c9302c);
+        color: white;
+        font-size: 15px;
+        padding: 9px 16px;
+        border-radius: 7px;
+        margin: 0;
+        border: none;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .logout-btn:hover {
+        background: linear-gradient(90deg, #c9302c, #a82723);
+      }
+      .welcome-username {
+        color: #ffcc00;
+        font-weight: bold;
+        font-size: 18px;
+      }
+      .book-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: flex-start;
+      }
+      .book-card {
+        border: 1px solid #ddd;
+        padding: 16px 12px 18px 12px;
+        width: 180px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        background: #fff;
+        overflow-wrap: break-word;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .book-card img {
+        width: 90%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 8px;
+      }
+      .book-title {
+        font-size: 17px;
+        margin: 10px 0 6px 0;
+        color: #ff9900;
+        font-weight: bold;
+        text-align: center;
+        min-height: 36px;
+      }
+      a.read-link {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        background: #ff9900;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: background 0.3s;
+        margin: 7px 0;
+        font-size: 16px;
+      }
+      a.read-link:hover {
+        background: #ffcc00;
+        color: #232f3e;
+      }
+      .added-by {
+        color: #999;
+        font-size: 14px;
+        margin-top: 5px;
+        word-break: break-all;
+        white-space: normal;
+        width: 100%;
+        text-align: left;
+        padding: 2px 0 0 0;
+      }
+      .hidden {
+        display: none !important;
+      }
+      .add-book-btn-section {
+        margin-bottom: 8px;
+      }
+      #add-book-form {
+        margin-bottom: 20px;
+      }
+      #add-book-form input {
+        font-size: 15px;
+      }
+      #user-section h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+      #user-section label {
+        font-size: 15px;
+      }
+      footer {
+        margin-top: 40px;
+        text-align: center;
+        font-family: "Atomic Age", cursive;
+        background: #232f3e;
+        color: #fff;
+        padding: 18px;
+        border-radius: 14px;
+      }
+      footer a {
+        color: #77a5d9;
+        text-decoration: underline;
+        transition: color 0.2s;
+      }
+      .developer-name {
+        color: #ff9900;
+        font-weight: bold;
+      }
+      @media (max-width: 900px) {
         body {
-            font-family: Arial, sans-serif;
-            max-width: 1600px;
-            margin: 40px auto;
-            padding: 0 30px;
-            background: #f5f5f5;
-            color: #333;
-        }
-        header {
-            background: #232F3E;
-            color: #FF9900;
-            padding: 30px 10px;
-            text-align: center;
-            border-radius: 12px;
-            margin-bottom: 24px;
-        }
-        h1 {
-            font-family: 'Shojumaru', cursive;
-            margin: 0;
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-        }
-        .center-container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            width: 100%;
-            margin-bottom: 40px;
-            gap: 40px;
+          max-width: 100vw;
+          padding: 0 8px;
         }
         .container {
-            background: white;
-            padding: 28px 24px;
-            border-radius: 14px;
-            box-shadow: 0 0 16px rgba(0,0,0,0.08);
-            width: 350px;
-            max-width: 110vw;
-            margin: 0 auto;
-            box-sizing: border-box;
+          padding: 12px 6px;
+          width: 97vw;
         }
         #user-section.container {
-            width: 100%;
-            max-width: 1000px;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-        input, select, textarea {
-            font-size: 15px;
-            margin: 9px 0 16px 0;
-            padding: 9px 9px;
-            width: 100%;
-            box-sizing: border-box;
-            border-radius: 7px;
-            border: 1px solid #ddd;
-        }
-        button {
-            background: linear-gradient(90deg, #FF9900, #FFCC00);
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            cursor: pointer;
-            transition: background 0.3s;
-            font-size: 15px;
-            border-radius: 7px;
-            margin: 7px 0;
-        }
-        button:hover {
-            background: linear-gradient(90deg, #FFCC00, #FF9900);
-        }
-        .button-group {
-            display: flex;
-            justify-content: center;
-            margin: 12px 0 8px 0;
-            gap: 8px;
-        }
-        .search-container {
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
+          padding-left: 6px;
+          padding-right: 6px;
+          width: 97vw;
         }
         .search-container input {
-            width: 360px;
-            max-width: 70vw;
-            font-size: 17px;
-            padding: 9px 12px;
-            margin-bottom: 0;
-            border-radius: 8px;
-        }
-        .search-container button {
-            width: 100px;
-            font-size: 15px;
-            padding: 9px 0;
-            border-radius: 7px;
-        }
-        /* --- User section top bar (Welcome, Add Book, Logout) --- */
-        .user-top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .user-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .logout-btn {
-            background: linear-gradient(90deg, #d9534f, #c9302c);
-            color: white;
-            font-size: 15px;
-            padding: 9px 16px;
-            border-radius: 7px;
-            margin: 0;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .logout-btn:hover {
-            background: linear-gradient(90deg, #c9302c, #a82723);
-        }
-        .welcome-username {
-            color: #FFCC00;
-            font-weight: bold;
-            font-size: 18px;
+          width: 60vw;
         }
         .book-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: flex-start;
+          gap: 16px;
         }
         .book-card {
-            border: 1px solid #ddd;
-            padding: 16px 12px 18px 12px;
-            width: 180px;
-            box-shadow: 0 0 8px rgba(0,0,0,0.1);
-            border-radius: 12px;
-            background: #fff;
-            overflow-wrap: break-word;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+          width: 97vw;
+          max-width: 290px;
         }
-        .book-card img {
-            width: 90%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 8px;
+        .center-container {
+          flex-direction: column;
+          gap: 18px;
         }
-        .book-title {
-            font-size: 17px;
-            margin: 10px 0 6px 0;
-            color: #FF9900;
-            font-weight: bold;
-            text-align: center;
-            min-height: 36px;
+        .user-top-bar {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 7px;
         }
-        a.read-link {
-            display: block;
-            width: 100%;
-            box-sizing: border-box;
-            background: #FF9900;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: background 0.3s;
-            margin: 7px 0;
-            font-size: 16px;
+        .user-actions {
+          justify-content: flex-start;
+          margin-top: 8px;
         }
-        a.read-link:hover {
-            background: #FFCC00;
-            color: #232F3E;
-        }
-        .added-by {
-            color: #999;
-            font-size: 14px;
-            margin-top: 5px;
-            word-break: break-all;
-            white-space: normal;
-            width: 100%;
-            text-align: left;
-            padding: 2px 0 0 0;
-        }
-        .hidden {
-            display: none !important;
-        }
-        .add-book-btn-section {
-            margin-bottom: 8px;
-        }
-        #add-book-form {
-            margin-bottom: 20px;
-        }
-        #add-book-form input {
-            font-size: 15px;
-        }
-        #user-section h2 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-        #user-section label {
-            font-size: 15px;
-        }
-        footer {
-            margin-top: 40px;
-            text-align: center;
-            font-family: 'Atomic Age', cursive;
-            background: #232F3E;
-            color: #fff;
-            padding: 18px;
-            border-radius: 14px;
-        }
-        footer a {
-            color: #77a5d9;
-            text-decoration: underline;
-            transition: color 0.2s;
-        }
-        .developer-name {
-            color: #FF9900;
-            font-weight: bold;
-        }
-        @media (max-width: 900px) {
-            body { max-width: 100vw; padding: 0 8px; }
-            .container { padding: 12px 6px; width: 97vw;}
-            #user-section.container { padding-left: 6px; padding-right: 6px; width: 97vw;}
-            .search-container input { width: 60vw;}
-            .book-list { gap: 16px;}
-            .book-card { width: 97vw; max-width: 290px;}
-            .center-container { flex-direction: column; gap: 18px; }
-            .user-top-bar { flex-direction: column; align-items: flex-start; gap: 7px;}
-            .user-actions { justify-content: flex-start; margin-top:8px;}
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>MY Book Verse</h1>
+      <h1>MY Book Verse</h1>
     </header>
     <div class="search-container">
-        <input type="text" id="search" placeholder="Search Books..." autocomplete="off" />
-        <button id="search-btn">Search</button>
+      <input
+        type="text"
+        id="search"
+        placeholder="Search Books..."
+        autocomplete="off"
+      />
+      <button id="search-btn">Search</button>
     </div>
 
     <!-- Forms Block (Centered) -->
     <div class="center-container">
-        <!-- Auth block -->
-        <div id="auth-section" class="container">
-            <h2 style="text-align:center;">Login / Signup</h2>
-            <input type="text" id="username" placeholder="Username" autocomplete="username"/>
-            <input type="password" id="password" placeholder="Password" autocomplete="current-password"/>
-            <div class="button-group">
-                <button id="login-btn">Login</button>
-                <button id="signup-btn">Signup</button>
-            </div>
+      <!-- Auth block -->
+      <div id="auth-section" class="container">
+        <h2 style="text-align: center">Login / Signup</h2>
+        <input
+          type="text"
+          id="username"
+          placeholder="Username"
+          autocomplete="username"
+        />
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          autocomplete="current-password"
+        />
+        <div class="button-group">
+          <button id="login-btn">Login</button>
+          <button id="signup-btn">Signup</button>
         </div>
-        <!-- User content after login -->
-        <div id="user-section" class="container hidden">
-            <div class="user-top-bar">
-                <h2 style="margin:0; font-size:18px; font-weight:normal;">
-                    Welcome <span id="user-name" class="welcome-username"></span>
-                </h2>
-                <div class="user-actions">
-                    <button id="show-add-book-btn">Add Book</button>
-                    <button id="logout-btn" class="logout-btn">Logout</button>
-                </div>
-            </div>
-            <form id="add-book-form" class="hidden">
-                <input type="text" id="book-title" placeholder="Book Title" required />
-                <input type="url" id="book-image" placeholder="Book Image URL" />
-                <input type="url" id="book-read" placeholder="Book Read URL" required />
-                <div class="button-group">
-                    <button type="button" id="add-book-btn">Add Book</button>
-                    <button type="button" id="cancel-add-book-btn" style="background:#ccc;color:#333;">Cancel</button>
-                </div>
-            </form>
+      </div>
+      <!-- User content after login -->
+      <div id="user-section" class="container hidden">
+        <div class="user-top-bar">
+          <h2 style="margin: 0; font-size: 18px; font-weight: normal">
+            Welcome <span id="user-name" class="welcome-username"></span>
+          </h2>
+          <div class="user-actions">
+            <button id="show-add-book-btn">Add Book</button>
+            <button id="logout-btn" class="logout-btn">Logout</button>
+          </div>
         </div>
+        <form id="add-book-form" class="hidden">
+          <input
+            type="text"
+            id="book-title"
+            placeholder="Book Title"
+            required
+          />
+          <input type="url" id="book-image" placeholder="Book Image URL" />
+          <input
+            type="url"
+            id="book-read"
+            placeholder="Book Read URL"
+            required
+          />
+          <div class="button-group">
+            <button type="button" id="add-book-btn">Add Book</button>
+            <button
+              type="button"
+              id="cancel-add-book-btn"
+              style="background: #ccc; color: #333"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- Books list: now below the forms/add-book block -->
-    <div style="margin-bottom:40px;">
-        <h3 style="margin-bottom:15px; font-size:18px;">Books List</h3>
-        <div id="books" class="book-list"></div>
+    <div style="margin-bottom: 40px">
+      <h3 style="margin-bottom: 15px; font-size: 18px">Books List</h3>
+      <div id="books" class="book-list"></div>
     </div>
 
     <footer>
-        <p>Developer: <span class="developer-name">Mannem Yuvaraju</span></p>
-        <p>
-            <a href="https://www.linkedin.com/in/mannem-yuvaraju/" target="_blank">LinkedIn</a> |
-            <a href="https://yuvaraju-portfolio.vercel.app/" target="_blank">Portfolio</a> |
-            <a href="https://github.com/YuvarajuMannem" target="_blank">GitHub</a>
-        </p>
+      <p>Developer: <span class="developer-name">Mannem Yuvaraju</span></p>
+      <p>
+        <a href="https://www.linkedin.com/in/mannem-yuvaraju/" target="_blank"
+          >LinkedIn</a
+        >
+        |
+        <a href="https://yuvaraju-portfolio.vercel.app/" target="_blank"
+          >Portfolio</a
+        >
+        |
+        <a href="https://github.com/YuvarajuMannem" target="_blank">GitHub</a>
+      </p>
     </footer>
 
     <script>
-        const apiUrl = 'https://my-bookverse.onrender.com/api'
-        const authSection = document.getElementById('auth-section');
-        const userSection = document.getElementById('user-section');
-        const userNameSpan = document.getElementById('user-name');
-        const booksContainer = document.getElementById('books');
-        const searchInput = document.getElementById('search');
-        const searchButton = document.getElementById('search-btn');
-        const showAddBookBtn = document.getElementById('show-add-book-btn');
-        const addBookForm = document.getElementById('add-book-form');
-        const cancelAddBookBtn = document.getElementById('cancel-add-book-btn');
+      const apiUrl = "http://localhost:5000/api";
+      const authSection = document.getElementById("auth-section");
+      const userSection = document.getElementById("user-section");
+      const userNameSpan = document.getElementById("user-name");
+      const booksContainer = document.getElementById("books");
+      const searchInput = document.getElementById("search");
+      const searchButton = document.getElementById("search-btn");
+      const showAddBookBtn = document.getElementById("show-add-book-btn");
+      const addBookForm = document.getElementById("add-book-form");
+      const cancelAddBookBtn = document.getElementById("cancel-add-book-btn");
 
-        let allBooks = [];
+      let allBooks = [];
 
-        // Login Handler
-        document.getElementById('login-btn').onclick = async () => {
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
-            if (!username || !password) { alert('Enter username & password'); return;}
-            const res = await fetch(apiUrl + '/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password }),
-            });
-            const data = await res.json();
-            if (res.ok) {
-                startSession(data.username);
-            } else {
-                alert(data.error || 'Login failed');
-            }
-        };
-
-        // Signup Handler
-        document.getElementById('signup-btn').onclick = async () => {
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
-            if (!username || !password) { alert('Enter username & password'); return;}
-            const res = await fetch(apiUrl + '/auth/signup', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password }),
-            });
-            const data = await res.json();
-            if (res.ok) {
-                startSession(data.username);
-            } else {
-                alert(data.error || 'Signup failed');
-            }
-        };
-
-        // Logout
-        document.getElementById('logout-btn').onclick = async () => {
-            await fetch(apiUrl + '/auth/logout', { method: 'POST' });
-            endSession();
-        };
-
-        function startSession(username) {
-            userNameSpan.textContent = username;
-            authSection.classList.add('hidden');
-            userSection.classList.remove('hidden');
-            showAddBookBtn.classList.remove('hidden');
-            addBookForm.classList.add('hidden');
+      // Login Handler
+      document.getElementById("login-btn").onclick = async () => {
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
+        if (!username || !password) {
+          alert("Enter username & password");
+          return;
         }
-        function endSession() {
-            userNameSpan.textContent = '';
-            authSection.classList.remove('hidden');
-            userSection.classList.add('hidden');
-            showAddBookBtn.classList.remove('hidden');
-            addBookForm.classList.add('hidden');
+        const res = await fetch(apiUrl + "/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        });
+        const data = await res.json();
+        if (res.ok) {
+          startSession(data.username);
+        } else {
+          alert(data.error || "Login failed");
         }
+      };
 
-        // Add Book Reveal/Hide Logic
-        showAddBookBtn.onclick = function() {
-            showAddBookBtn.classList.add('hidden');
-            addBookForm.classList.remove('hidden');
-        };
-        cancelAddBookBtn.onclick = function() {
-            addBookForm.classList.add('hidden');
-            showAddBookBtn.classList.remove('hidden');
-            addBookForm.reset && addBookForm.reset();
-        };
-
-        // Add Book Submission
-        document.getElementById('add-book-btn').onclick = async () => {
-            const title = document.getElementById('book-title').value.trim();
-            const imageUrl = document.getElementById('book-image').value.trim();
-            const readUrl = document.getElementById('book-read').value.trim();
-            if (!title || !readUrl) { alert('Title and Read URL are required'); return; }
-            const res = await fetch(apiUrl + '/books/add', {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ title, imageUrl, readUrl }),
-            });
-            const data = await res.json();
-            if (res.ok) {
-                alert('Book added successfully');
-                addBookForm.reset && addBookForm.reset();
-                addBookForm.classList.add('hidden');
-                showAddBookBtn.classList.remove('hidden');
-                loadBooks();
-            } else {
-                alert(data.error || 'Failed to add book');
-            }
-        };
-
-        // Display Books Function
-        function displayBooks(books) {
-            booksContainer.innerHTML = '';
-            if (!books.length) {
-                booksContainer.innerHTML = "<div style='color:#777;font-size:16px;padding:12px;'>No books found.</div>";
-                return;
-            }
-            books.forEach(book => {
-                const div = document.createElement('div');
-                div.className = 'book-card';
-                div.innerHTML = `
-                    <img src="${book.imageUrl || 'https://via.placeholder.com/180x220?text=No+Image'}" alt="${book.title}" />
-                    <div class="book-title">${book.title}</div>
-                    <a class="read-link" href="${book.readUrl}" target="_blank">Read Book</a>
-                    <div class="added-by">Added by: ${book.userId.username}</div>
-                `;
-                booksContainer.appendChild(div);
-            });
+      // Signup Handler
+      document.getElementById("signup-btn").onclick = async () => {
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
+        if (!username || !password) {
+          alert("Enter username & password");
+          return;
         }
-
-        // Load Books (fetch from server)
-        async function loadBooks() {
-            const res = await fetch(apiUrl + '/books');
-            const data = await res.json();
-            allBooks = data;
-            displayBooks(allBooks);
+        const res = await fetch(apiUrl + "/auth/signup", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        });
+        const data = await res.json();
+        if (res.ok) {
+          startSession(data.username);
+        } else {
+          alert(data.error || "Signup failed");
         }
+      };
 
-        // Initial load for guests too
-        window.onload = function() {
-            loadBooks();
-        };
+      // Logout
+      document.getElementById("logout-btn").onclick = async () => {
+        await fetch(apiUrl + "/auth/logout", { method: "POST" });
+        endSession();
+      };
 
-        // Live search
-        let searchTimeout = null;
-        searchInput.addEventListener('input', function() {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                liveSearch(searchInput.value.trim());
-            }, 140);
+      function startSession(username) {
+        userNameSpan.textContent = username;
+        authSection.classList.add("hidden");
+        userSection.classList.remove("hidden");
+        showAddBookBtn.classList.remove("hidden");
+        addBookForm.classList.add("hidden");
+      }
+      function endSession() {
+        userNameSpan.textContent = "";
+        authSection.classList.remove("hidden");
+        userSection.classList.add("hidden");
+        showAddBookBtn.classList.remove("hidden");
+        addBookForm.classList.add("hidden");
+      }
+
+      // Add Book Reveal/Hide Logic
+      showAddBookBtn.onclick = function () {
+        showAddBookBtn.classList.add("hidden");
+        addBookForm.classList.remove("hidden");
+      };
+      cancelAddBookBtn.onclick = function () {
+        addBookForm.classList.add("hidden");
+        showAddBookBtn.classList.remove("hidden");
+        addBookForm.reset && addBookForm.reset();
+      };
+
+      // Add Book Submission
+      document.getElementById("add-book-btn").onclick = async () => {
+        const title = document.getElementById("book-title").value.trim();
+        const imageUrl = document.getElementById("book-image").value.trim();
+        const readUrl = document.getElementById("book-read").value.trim();
+        if (!title || !readUrl) {
+          alert("Title and Read URL are required");
+          return;
+        }
+        const res = await fetch(apiUrl + "/books/add", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ title, imageUrl, readUrl }),
+          credentials: "include", // <-- This is the key
         });
 
-        searchButton.onclick = function() {
-            liveSearch(searchInput.value.trim());
-        };
-
-        function liveSearch(query) {
-            if (!query) {
-                displayBooks(allBooks);
-                return;
-            }
-            const clean = query.toLowerCase();
-            const filtered = allBooks.filter(book =>
-                book.title && book.title.toLowerCase().includes(clean)
-            );
-            displayBooks(filtered);
+        const data = await res.json();
+        if (res.ok) {
+          alert("Book added successfully");
+          addBookForm.reset && addBookForm.reset();
+          addBookForm.classList.add("hidden");
+          showAddBookBtn.classList.remove("hidden");
+          loadBooks();
+        } else {
+          alert(data.error || "Failed to add book");
         }
+      };
+
+      // Display Books Function
+      function displayBooks(books) {
+        booksContainer.innerHTML = "";
+        if (!books.length) {
+          booksContainer.innerHTML =
+            "<div style='color:#777;font-size:16px;padding:12px;'>No books found.</div>";
+          return;
+        }
+        books.forEach((book) => {
+          const div = document.createElement("div");
+          div.className = "book-card";
+          div.innerHTML = `
+                    <img src="${
+                      book.imageUrl ||
+                      "https://via.placeholder.com/180x220?text=No+Image"
+                    }" alt="${book.title}" />
+                    <div class="book-title">${book.title}</div>
+                    <a class="read-link" href="${
+                      book.readUrl
+                    }" target="_blank">Read Book</a>
+                    <div class="added-by">Added by: ${
+                      book.userId.username
+                    }</div>
+                `;
+          booksContainer.appendChild(div);
+        });
+      }
+
+      // Load Books (fetch from server)
+      async function loadBooks() {
+        const res = await fetch(apiUrl + "/books");
+        const data = await res.json();
+        allBooks = data;
+        displayBooks(allBooks);
+      }
+
+      // Initial load for guests too
+      window.onload = function () {
+        loadBooks();
+      };
+
+      // Live search
+      let searchTimeout = null;
+      searchInput.addEventListener("input", function () {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+          liveSearch(searchInput.value.trim());
+        }, 140);
+      });
+
+      searchButton.onclick = function () {
+        liveSearch(searchInput.value.trim());
+      };
+
+      function liveSearch(query) {
+        if (!query) {
+          displayBooks(allBooks);
+          return;
+        }
+        const clean = query.toLowerCase();
+        const filtered = allBooks.filter(
+          (book) => book.title && book.title.toLowerCase().includes(clean)
+        );
+        displayBooks(filtered);
+      }
     </script>
-</body>
+  </body>
 </html>
