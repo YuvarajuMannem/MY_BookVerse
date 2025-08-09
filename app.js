@@ -10,7 +10,7 @@ app.use(express.json());
 
 
 app.use(cors({
-  origin: true,          
+  origin: "https://my-book-verse.vercel.app/",
   credentials: true      
 }));
 
