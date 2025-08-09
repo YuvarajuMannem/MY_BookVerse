@@ -30,7 +30,7 @@ const Book = require('./models/Book');
 const authRoutes = require('./routes/auth');
 const bookRoutes = require('./routes/books');
 
-app.use('/api',(req,res)=>{
+app.get('/api',(req,res)=>{
   return res.json({ message: 'BookVerse API up' });
 })
 app.use('/api/auth', authRoutes);
